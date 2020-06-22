@@ -1,28 +1,91 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+    >
+    <!--Items in nav drawer-->
+    <!-- Clean up and add links to object array in data -->
+      <v-list dense>
+        <v-list-item link @click="activeComponent = 'Home'">
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link @click="activeComponent = 'AddUser'">
+          <v-list-item-action>
+            <v-icon>mdi-account-plus</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Add User</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link @click="activeComponent = 'UserSearch'">
+          <v-list-item-action>
+            <v-icon>mdi-account-search</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Find User</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link @click="activeComponent = 'ViewProducts'">
+          <v-list-item-action>
+            <v-icon>mdi-store</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>View Products</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <!--Top bar-->
+    <v-app-bar
+      app
+      clipped-left
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Rob's Place</v-toolbar-title>
+    </v-app-bar>
+
+    <!--Main content-->
+    <v-main>
+      <v-container
+        fluid
+      >
+        <Home v-if="activeComponent == 'Home'"></Home>
+        <AddUser v-if="activeComponent == 'AddUser'"></AddUser>
+        <UserSearch v-if="activeComponent == 'UserSearch'"></UserSearch>
+        <ViewProducts v-if="activeComponent == 'ViewProducts'"></ViewProducts>
+      </v-container>
+    </v-main>
+
+    <!--Footer-->
+    <v-footer app>
+      <span>&copy;</span>
+      <span v-text="new Date().getFullYear()"></span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Home from './components/Home';
+import AddUser from './components/AddUser'
+import UserSearch from './components/UserSearch'
+import ViewProducts from './components/ViewProducts'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    AddUser, Home, UserSearch, ViewProducts,
+  },
+  data: () => ({
+    activeComponent: 'Home',
+    drawer: null,
+  }),
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
