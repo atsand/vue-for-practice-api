@@ -32,6 +32,14 @@
             <v-list-item-title>Find User</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item link @click="activeComponent = 'AddProduct'">
+          <v-list-item-action>
+            <v-icon>mdi-view-grid-plus</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Add Product</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item link @click="activeComponent = 'ViewProducts'">
           <v-list-item-action>
             <v-icon>mdi-store</v-icon>
@@ -61,6 +69,7 @@
         <AddUser v-if="activeComponent == 'AddUser'"></AddUser>
         <UserSearch v-if="activeComponent == 'UserSearch'"></UserSearch>
         <ViewProducts v-if="activeComponent == 'ViewProducts'"></ViewProducts>
+        <AddProduct v-if="activeComponent == 'AddProduct'"></AddProduct>
       </v-container>
     </v-main>
 
@@ -77,11 +86,12 @@ import Home from './components/Home';
 import AddUser from './components/AddUser'
 import UserSearch from './components/UserSearch'
 import ViewProducts from './components/ViewProducts'
+import AddProduct from './components/AddProduct'
 
 export default {
   name: 'App',
   components: {
-    AddUser, Home, UserSearch, ViewProducts,
+    AddUser, Home, UserSearch, ViewProducts, AddProduct,
   },
   data: () => ({
     activeComponent: 'Home',
