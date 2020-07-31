@@ -133,10 +133,7 @@ import axios from 'axios'
             var self = this;
         if (self.$refs.addUserForm.validate()){
             self.loading = true,
-            alert('passed validation'),
             axios.post('https://localhost:10000/user', self.newUser)
-            //This isn't waiting for the response correctly
-            //Still thinks it's working when duplicate exists
             .then(()=>{
                 self.userAddSuccess = true;
                 self.addedUser = self.newUser;
@@ -153,7 +150,7 @@ import axios from 'axios'
             )
         }
         else {
-            alert('no bueno');
+            alert('you must complete required fields');
         }
         }
     }

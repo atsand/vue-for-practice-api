@@ -37,6 +37,7 @@
                         :items="productGroups"
                         item-text="name"
                         item-value="id"
+                        :loading="gettingGroups"
                         v-model="newProduct.GroupID">
                       </v-select>
                     </v-col>
@@ -73,14 +74,6 @@ import axios from 'axios'
         valid: false,
         rules:{
             required: v => !!v || 'Field Required',
-            email: [
-                v => !!v || 'Field required',
-                v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-            ],
-            zip: [
-                v => !!v || 'Field required',
-                v => /\d{5}/.test(v) || 'Zip code must be 5 digits'
-            ],
         },
         errorMessage: null,
         newProduct: {
@@ -88,11 +81,16 @@ import axios from 'axios'
             Description: null,
             Price: null,
             GroupID: null,
+            IsActive: null,
         },
         addedProduct:null,
         productAddSuccess: null,
         loading: false,
-        productGroups: null,
+        productGroups: [{
+          id: '',
+          name: '',
+        }],
+        gettingGroups: true,
      }),
     mounted() {
       this.getProductGroups();
@@ -102,10 +100,7 @@ import axios from 'axios'
             var self = this;
         if (self.$refs.addProductForm.validate()){
             self.loading = true,
-            alert('passed validation'),
-            axios.post('https://localhost:10000/products', self.newProduct)
-            //This isn't waiting for the response correctly
-            //Still thinks it's working when duplicate exists
+            axios.post('https://localhost:10000/products/', self.newProduct)
             .then(()=>{
                 self.productAddSuccess = true;
                 self.addedProduct = self.newProduct;
@@ -122,7 +117,7 @@ import axios from 'axios'
             )
         }
         else {
-            alert('no bueno');
+            alert('you must complete required fields');
         }
         },
         getProductGroups () {
@@ -133,6 +128,9 @@ import axios from 'axios'
           })
           .catch(error => {
             console.log(error);
+          })
+          .finally(() => {
+            this.gettingGroups = false;
           })
         },
         restrictDecimal () {
