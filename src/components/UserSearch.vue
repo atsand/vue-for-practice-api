@@ -25,16 +25,7 @@
                     multi-sort
                 ></v-data-table>
             </v-card-text>
-            <!-- <v-card-actions>
-                <v-btn
-                    class="primary"
-                    @click="getAllUsers()"
-                >
-                    Get All Users
-                </v-btn>
-            </v-card-actions> -->
         </v-card>
-        <div v-for="user in allUsers" :key="user.id">{{ user }}</div>
     </v-container>
 </template>
 
@@ -48,7 +39,7 @@ import axios from 'axios'
         allUsers: null,
         headers: [
             {text: 'First', value: 'name.first'},
-            //{text: 'Middle', value: 'name.middle'},
+            {text: 'Middle', value: 'name.middle'},
             {text: 'Last', value: 'name.last'},
             {text: 'Email', value: 'email'},
             {text: 'Street', value: 'address.street'},

@@ -22,11 +22,17 @@
                     <v-spacer></v-spacer>
                     <v-btn
                         class="primary"
-                        right
                         @click="addToCart(product.id)"
                         v-if="!cart.filter(p => p.id == product.id).length > 0 && product.isActive"
                     >
                         Add To Cart
+                    </v-btn>
+                    <v-btn
+                        class="success"
+                        @click="removeFromCart(product.id)"
+                        v-if="cart.filter(p => p.id == product.id).length > 0 && product.isActive"
+                    >
+                        Remove from Cart
                     </v-btn>
                     <v-btn
                         class="secondary"
@@ -35,14 +41,6 @@
                     >
                         Unavailable
                     </v-btn>
-                    <v-text-field 
-                        v-if="cart.filter(p => p.id == product.id).length > 0"
-                        type="number" 
-                        append-outer-icon="mdi-plus"
-                        @click:append-outer="increment(product.id)" 
-                        prepend-icon="mdi-minus" 
-                        @click:prepend="decrement(product.id)"
-                    ></v-text-field>
                 </v-card-actions>
             </v-card>
           </v-col>
@@ -65,20 +63,6 @@
         this.getAllProducts();
     },
     methods: {
-        increment(id){
-            var index = this.cart.findIndex((product => product.id == id));
-            if(index >= 0){
-                this.cart[index].qty = this.cart[index].qty + 1;
-                alert(this.cart[index].qty)
-            }
-            console.log(this.cart.filter(p => p.id == id))
-        },
-        decrement(id){
-            var index = this.cart.findIndex((product => product.id == id));
-            if(index && this.cart[index].qyt >= 1){
-                this.cart[index].qty = this.cart[index] --;
-            }
-        },
         getAllProducts(){
             axios.get('https://localhost:10000/products/all')
             .then(response => {
@@ -93,6 +77,9 @@
             this.cart.push({id: id, qty: 1});
             console.log(this.cart);
         },
+        removeFromCart(id){
+            this.cart = this.cart.filter(x => x.id !== id);
+        }
     },
   }
 </script>
