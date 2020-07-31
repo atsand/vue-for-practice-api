@@ -39,7 +39,7 @@ import axios from 'axios'
         allUsers: null,
         headers: [
             {text: 'First', value: 'name.first'},
-            {text: 'Middle', value: 'name.middle'},
+            //{text: 'Middle', value: 'name.middle'},
             {text: 'Last', value: 'name.last'},
             {text: 'Email', value: 'email'},
             {text: 'Street', value: 'address.street'},

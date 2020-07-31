@@ -27,7 +27,8 @@
                         :rules=[rules.required]
                         v-model="newProduct.Price"
                         prefix="$"
-                        @change="restrictDecimal()">
+                        @change="restrictDecimal()"
+                        >
                       </v-text-field>
                     </v-col>
                     <v-col cols="12">
@@ -38,7 +39,7 @@
                         item-text="name"
                         item-value="id"
                         :loading="gettingGroups"
-                        v-model="newProduct.GroupID">
+                        v-model="newProduct.GroupId">
                       </v-select>
                     </v-col>
                     <v-col cols="12">
@@ -80,8 +81,7 @@ import axios from 'axios'
             Name: null,
             Description: null,
             Price: null,
-            GroupID: null,
-            IsActive: null,
+            GroupId: null,
         },
         addedProduct:null,
         productAddSuccess: null,
@@ -100,7 +100,8 @@ import axios from 'axios'
             var self = this;
         if (self.$refs.addProductForm.validate()){
             self.loading = true,
-            axios.post('https://localhost:10000/products/', self.newProduct)
+            self.newProduct.Price = parseFloat(self.newProduct.Price);
+            axios.post('https://localhost:10000/products', self.newProduct)
             .then(()=>{
                 self.productAddSuccess = true;
                 self.addedProduct = self.newProduct;
@@ -134,7 +135,7 @@ import axios from 'axios'
           })
         },
         restrictDecimal () {
-          this.newProduct.Price=parseFloat(this.newProduct.Price).toFixed(2);
+           this.newProduct.Price=parseFloat(this.newProduct.Price).toFixed(2);
         }
     }
   }
