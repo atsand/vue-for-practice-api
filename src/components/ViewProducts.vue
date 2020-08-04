@@ -14,7 +14,7 @@
                         {{ product.description }}
                     </div>
                     <div>
-                        {{ product.price }}
+                        ${{ product.price }}
                     </div>
                 </v-card-text>
                 <v-spacer></v-spacer>
@@ -32,7 +32,7 @@
                         @click="removeFromCart(product.id)"
                         v-if="cart.filter(p => p.id == product.id).length > 0 && product.isActive"
                     >
-                        Remove from Cart
+                        Remove
                     </v-btn>
                     <v-btn
                         class="secondary"
@@ -86,6 +86,6 @@
 
 <style scoped>
 .product-card{
-    min-height: 300px;
+    max-height: 500px;
 }
 </style>
