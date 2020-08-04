@@ -131,27 +131,27 @@ import axios from 'axios'
     methods: {
         addUser () {
             var self = this;
-        if (self.$refs.addUserForm.validate()){
-            self.loading = true,
-            axios.post('https://localhost:10000/user', self.newUser)
-            .then(()=>{
-                self.userAddSuccess = true;
-                self.addedUser = self.newUser;
-                self.$refs.addUserForm.reset;
-                alert('User Added');
-            })
-            .catch(function(error){
-                self.userAddSuccess = false;
-                self.errorMessage = error.response.data;
-                alert(self.errorMessage);
-            })
-            .then(
-                self.loading = false,
-            )
-        }
-        else {
-            alert('you must complete required fields');
-        }
+          if (self.$refs.addUserForm.validate()){
+              self.loading = true,
+              axios.post('https://localhost:10000/user', self.newUser)
+              .then(()=>{
+                  self.userAddSuccess = true;
+                  self.addedUser = self.newUser;
+                  self.$refs.addUserForm.reset();
+                  alert('User Added');
+              })
+              .catch(function(error){
+                  self.userAddSuccess = false;
+                  self.errorMessage = error.response.data;
+                  alert(self.errorMessage);
+              })
+              .then(
+                  self.loading = false,
+              )
+          }
+          else {
+              alert('you must complete required fields');
+          }
         }
     }
   }

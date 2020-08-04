@@ -98,28 +98,28 @@ import axios from 'axios'
     methods: {
         addProduct () {
             var self = this;
-        if (self.$refs.addProductForm.validate()){
-            self.loading = true,
-            self.newProduct.Price = parseFloat(self.newProduct.Price);
-            axios.post('https://localhost:10000/products', self.newProduct)
-            .then(()=>{
-                self.productAddSuccess = true;
-                self.addedProduct = self.newProduct;
-                self.$refs.addProductForm.reset;
-                alert('Product Added');
-            })
-            .catch(function(error){
-                self.ProductAddSuccess = false;
-                self.errorMessage = error.response.data;
-                alert(self.errorMessage);
-            })
-            .then(
-                self.loading = false,
-            )
-        }
-        else {
-            alert('you must complete required fields');
-        }
+          if (self.$refs.addProductForm.validate()){
+              self.loading = true,
+              self.newProduct.Price = parseFloat(self.newProduct.Price);
+              axios.post('https://localhost:10000/products', self.newProduct)
+              .then(()=>{
+                  self.productAddSuccess = true;
+                  self.addedProduct = self.newProduct;
+                  self.$refs.addProductForm.reset();
+                  alert('Product Added');
+              })
+              .catch(function(error){
+                  self.ProductAddSuccess = false;
+                  self.errorMessage = error.response.data;
+                  alert(self.errorMessage);
+              })
+              .then(
+                  self.loading = false,
+              )
+          }
+          else {
+              alert('you must complete required fields');
+          }
         },
         getProductGroups () {
           axios.get('https://localhost:10000/groups')

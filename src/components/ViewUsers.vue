@@ -33,7 +33,7 @@
 import axios from 'axios'
 
   export default {
-    name: 'UserSearch',
+    name: 'ViewUsers',
 
     data: () => ({
         allUsers: null,

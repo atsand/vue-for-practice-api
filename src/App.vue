@@ -24,17 +24,17 @@
             <v-list-item-title>Add User</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link @click="activeComponent = 'UserSearch'">
+        <v-list-item link @click="activeComponent = 'ViewUsers'">
           <v-list-item-action>
             <v-icon>mdi-account-search</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Find User</v-list-item-title>
+            <v-list-item-title>View Users</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link @click="activeComponent = 'AddProduct'">
           <v-list-item-action>
-            <v-icon>mdi-view-grid-plus</v-icon>
+            <v-icon>mdi-toy-brick-plus</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Add Product</v-list-item-title>
@@ -42,10 +42,26 @@
         </v-list-item>
         <v-list-item link @click="activeComponent = 'ViewProducts'">
           <v-list-item-action>
-            <v-icon>mdi-store</v-icon>
+            <v-icon>mdi-toy-brick-search</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>View Products</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link @click="activeComponent = 'AddProductGroup'">
+          <v-list-item-action>
+            <v-icon>mdi-folder-plus</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Add Product Group</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link @click="activeComponent = 'ViewProductGroups'">
+          <v-list-item-action>
+            <v-icon>mdi-folder-search</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>View Product Groups</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -67,9 +83,11 @@
       >
         <Home v-if="activeComponent == 'Home'"></Home>
         <AddUser v-if="activeComponent == 'AddUser'"></AddUser>
-        <UserSearch v-if="activeComponent == 'UserSearch'"></UserSearch>
+        <ViewUsers v-if="activeComponent == 'ViewUsers'"></ViewUsers>
         <ViewProducts v-if="activeComponent == 'ViewProducts'"></ViewProducts>
         <AddProduct v-if="activeComponent == 'AddProduct'"></AddProduct>
+        <AddProductGroup v-if="activeComponent == 'AddProductGroup'"></AddProductGroup>
+        <ViewProductGroups v-if="activeComponent == 'ViewProductGroups'"></ViewProductGroups>
       </v-container>
     </v-main>
 
@@ -84,14 +102,22 @@
 <script>
 import Home from './components/Home';
 import AddUser from './components/AddUser'
-import UserSearch from './components/UserSearch'
+import ViewUsers from './components/ViewUsers'
 import ViewProducts from './components/ViewProducts'
 import AddProduct from './components/AddProduct'
+import AddProductGroup from './components/AddProductGroup'
+import ViewProductGroups from './components/ViewProductGroups'
 
 export default {
   name: 'App',
   components: {
-    AddUser, Home, UserSearch, ViewProducts, AddProduct,
+    AddUser, 
+    Home, 
+    ViewUsers, 
+    ViewProducts, 
+    AddProduct, 
+    AddProductGroup,
+    ViewProductGroups,
   },
   data: () => ({
     activeComponent: 'Home',
