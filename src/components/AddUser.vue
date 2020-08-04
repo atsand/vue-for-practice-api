@@ -17,7 +17,7 @@
                       <v-text-field 
                         label="First Name"
                         :rules=[rules.required]                        
-                        v-model="newUser.Name.First">
+                        v-model="newUser.Name.Last">
                       </v-text-field>
                     </v-col>
                     <v-col cols="4">
@@ -30,7 +30,7 @@
                       <v-text-field 
                         label="Last Name"
                         :rules=[rules.required] 
-                        v-model="newUser.Name.Last">
+                        v-model="newUser.Name.First">
                       </v-text-field>
                     </v-col>
                   </v-row>

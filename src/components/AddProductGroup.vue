@@ -62,11 +62,9 @@ import axios from 'axios'
             var self = this;
           if (self.$refs.addProductGroupForm.validate()){
               self.loading = true,
-              axios.post('https://localhost:10000/groups', self.newProductGroup)
+              axios.post()
               .then(()=>{
                   self.groupAddSuccess = true;
-                  self.addedProductGroup = self.newProductGroup;
-                  self.$refs.addProductGroupForm.reset();
                   alert('Group Added');
               })
               .catch(function(error){
